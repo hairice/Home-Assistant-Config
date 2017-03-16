@@ -1,23 +1,4 @@
-- platform: template
-  switches:
-    vacation_mode:
-      value_template: "{{ states.group.vacation_mode.state == 'off' }}"
-      turn_on:
-        service: automation.turn_off
-        entity_id: group.vacation_mode
-      turn_off:
-        service: automation.turn_on
-        entity_id: group.vacation_mode
-    routines:
-      value_template: "{{ states.group.routines.state == 'off' }}"
-      turn_on:
-        service: automation.turn_off
-        entity_id: group.routines
-      turn_off:
-        - service: automation.turn_on
-          entity_id: group.routines
-        - service: automation.turn_off
-          entity_id: group.simulate_presence
+## COMMUNICATION WITH SMARTTHINGS HUB AND ZWAVE RECEPTICAL
 - platform: mqtt
   name: 'Christmas Lights'
   state_topic: "smartthings/Christmas Lights/switch"
@@ -25,6 +6,8 @@
   payload_on: "on"
   payload_off: "off"
   retain: true
+  
+## KEVO BRIDGE COMMAND AND STATUS
 - platform: command_line
   scan_interval: 30
   switches:
@@ -38,3 +21,20 @@
       command_off: "python /home/hass/.homeassistant/kevo/unlock-rear.py"
       command_state: "python /home/hass/.homeassistant/kevo/status-rear.py"
       value_template: '{{ value == "Locked" }}'
+
+## COLOR TEMP ADJUSTMENT OF HUE BULBS
+- platform: flux
+  lights:
+    - light.livingroom
+    - light.master_bedroom
+    - light.cabinet_lights
+  name: Fluxer
+  start_time: '7:00'
+  sunset_time: '21:30'
+  stop_time: '23:00'
+  start_colortemp: 4000
+  sunset_colortemp: 3000
+  stop_colortemp: 1900
+  brightness: 255
+  disable_brightness_adjust: True
+  mode: xy
