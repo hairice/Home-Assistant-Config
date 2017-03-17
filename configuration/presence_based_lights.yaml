@@ -1,4 +1,4 @@
-device_sun_light_trigger:
+
   light_group: group.presence_based_lights
   device_group: group.family
   disable_turn_off: 0
