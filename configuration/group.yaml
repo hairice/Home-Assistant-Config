@@ -98,8 +98,7 @@ routines:
   - automation.christmas_lights_off
   - automation.home_mode__general
   - automation.overnight__pantry_redim
-  - automation.color_temp_fix__livingroom
-  - automation.rain__unoccupied__stop
+  - automation.color_temp_fix__livingroom  - automation.rain__unoccupied__stop
   - automation.morning__stage_3
   - automation.exterior_front__dusk
   - automation.christmas_lights_on
@@ -138,9 +137,14 @@ shell_commands:
   - shell_command.lock_doors
   - shell_command.unlock_doors
 alarm_zones:
-    - sensor.front_door
-    - sensor.front_windows
-    - sensor.garage_door
-    - sensor.back_door
-    - sensor.back_windows
-    - sensor.bedroom_windows
+  - sensor.front_door
+  - sensor.front_windows
+  - sensor.garage_door
+  - sensor.back_door
+  - sensor.back_windows
+  - sensor.bedroom_windows
+presence_based_lights:
+  - light.master_bedroom
+  - light.livingroom
+  - light.cabinet_lights
+  - light.pantry
